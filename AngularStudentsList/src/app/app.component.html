@@ -1,0 +1,68 @@
+<body class="flex-box">
+  <table>
+    <tr>
+      <th (click)="sortData('id')">ID</th>
+      <th (click)="sortData('surname')">Surname</th>
+      <th (click)="sortData('firstName')">Name</th>
+      <th (click)="sortData('secondName')">Second Name</th>
+      <th (click)="sortData('Date')">Birthday</th>
+      <th (click)="sortData('avgMark')">Mark</th>
+    </tr>
+    <tr
+      *ngFor="let student of Students"
+      [class.average-mark] = "student.avgMark < 3 && checkAvgMark"
+      [class.selected] = "student === selectedStudent"
+      (click)="selectedStudent = student"
+    >
+        <td
+          [class.found-student] = "student.surname === studentSurname.value &&
+         student.firstName === studentFirstName.value">
+          {{student.id}}</td>
+        <td [class.found-student] = "student.surname === studentSurname.value">{{student.surname}}</td>
+        <td [class.found-student] = "student.firstName === studentFirstName.value">{{student.firstName}}</td>
+        <td>{{student.secondName}}</td>
+        <td>{{student.dateOfBirth}}</td>
+        <td>{{student.avgMark}}</td>
+    </tr>
+  </table>
+  <div>
+    <div class="filter">
+      <label>
+        <span>Показать студентов с низкой успеваемостью</span>
+        <input type="checkbox" [checked]="checkAvgMark" (change)="checkAvgMark = !checkAvgMark">
+      </label>
+    </div>
+    <div class="filter">
+      <label>
+        Поиск студента по фамилии
+        <input #studentSurname type="text" (keyup)="update()">
+      </label>
+      <br>
+      <label>
+        Поиск студента по имени
+        <input #studentFirstName type="text" (keyup)="update()">
+      </label>
+    </div>
+    <div class="filter">
+      <label>
+        Фильтр по дате рождения (младше даты)
+        <input #dateFilter type="date"><br>
+      </label>
+      <label>
+        Фильтр по средней оценке (оценка выше)
+        <input #markFilter type="text">
+      </label><br>
+      <button
+        (click)="unFilter(); filterStudentsDate(dateFilter.valueAsDate);
+        filterStudentsMark(markFilter.value)"
+      >Фильтровать</button>
+      <button  (click)="unFilter()">Убрать фильтры</button>
+    </div>
+    <button mat-raised-button (click)="openNewStudentDialog()">Добавить студента</button>
+    <button mat-raised-button (click)="openEditDialog(selectedStudent)">Изменить выбранного студента</button>
+    <button mat-raised-button (click)="openDeleteDialog(selectedStudent)">Удалить выбранного студента</button>
+  </div>
+</body>
+
+
+

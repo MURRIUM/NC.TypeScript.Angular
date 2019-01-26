@@ -1,0 +1,56 @@
+.flex-box{
+  display:flex;
+  flex: 1 1 auto;
+}
+
+table {
+  table-layout: fixed;
+  width: 60%;
+  border-collapse: collapse;
+  border: 3px solid red;
+}
+
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background-color: #979fa6;
+}
+
+tr:hover {
+  color: black;
+  background-color: #fff8c8;
+}
+
+.average-mark {
+  background-color: red;
+  color: white;
+}
+
+.found-student {
+  background-color: cyan;
+  color: black;
+}
+
+.selected {
+  background-color: #ff9910;
+  color: black;
+}
+
+.filter {
+  margin: 4px;
+  padding: 2px;
+}
+
+button {
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #cfd8dc;
+}

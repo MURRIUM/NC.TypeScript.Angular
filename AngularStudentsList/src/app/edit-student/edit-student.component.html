@@ -1,0 +1,28 @@
+<form [formGroup]="updateStudent" (ngSubmit)="onSubmit()" class="flex-box">
+  <div formGroupName="fullName" class="flex-box">
+    <label>
+      <span>Surname:</span>
+      <input class="form-control" type="text" formControlName="surname" required>
+    </label>
+    <label>
+      <span>First name:</span>
+      <input class="form-control" type="text" formControlName="firstName" [value]="" required>
+    </label>
+    <label>
+      <span>Second name:</span>
+      <input class="form-control" type="text" formControlName="secondName" required>
+    </label>
+  </div>
+  <label>
+    <span>Birthday:</span>
+    <input class="form-control" type="date" formControlName="birthDate" required>
+  </label>
+  <label>
+    <span class="input-name">Average mark:</span>
+    <input class="form-control" type="text" formControlName="avgMark" required>
+  </label>
+  <p>
+    Status: {{updateStudent.status}}
+  </p>
+</form>
+<button mat-raised-button type="submit" [disabled]="!updateStudent.valid" (click)="onSubmit(); close();">Отправить</button>
