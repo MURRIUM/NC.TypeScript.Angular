@@ -14,7 +14,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppComponent,
     DeletePopupComponent,
     NewStudentComponent,
-    EditStudentComponent,
+    EditStudentComponent
   ],
   imports: [
     BrowserModule,

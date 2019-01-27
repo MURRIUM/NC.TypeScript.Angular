@@ -21,7 +21,7 @@
         <td [class.found-student] = "student.surname === studentSurname.value">{{student.surname}}</td>
         <td [class.found-student] = "student.firstName === studentFirstName.value">{{student.firstName}}</td>
         <td>{{student.secondName}}</td>
-        <td>{{student.dateOfBirth}}</td>
+        <td>{{student.dateOfBirth.toDateString()}}</td>
         <td>{{student.avgMark}}</td>
     </tr>
   </table>

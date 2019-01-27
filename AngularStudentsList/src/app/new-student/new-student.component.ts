@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { StudentValidators } from '../student-validators/student.validators';
 
 @Component({
   selector: 'app-new-student',
@@ -8,14 +9,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: ['./new-student.component.css']
 })
 export class NewStudentComponent {
-
   newStudent = this.fb.group({
     fullName: this.fb.group({
       firstName: ['', Validators.required],
       secondName: ['', Validators.required],
       surname: ['', Validators.required]
-    }),
-    birthDate: ['', Validators.required],
+    }, { validators: StudentValidators.nameValidation}),
+    birthDate: ['', [Validators.required, StudentValidators.dateValidation]],
     avgMark: ['', Validators.required]
   });
   constructor(

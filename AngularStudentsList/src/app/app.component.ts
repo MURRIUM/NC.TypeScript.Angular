@@ -1,18 +1,10 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import { STUDENTS} from './mock-students';
 import { Student} from './student';
 import {DeletePopupComponent} from './delete-popup/delete-popup.component';
 import {NewStudentComponent} from './new-student/new-student.component';
 import {EditStudentComponent} from './edit-student/edit-student.component';
-import {promise} from 'selenium-webdriver';
-import {reject, resolve} from 'q';
-import {async} from '@angular/core/testing';
-
-export interface DialogData {
-  student: Student;
-  agree: boolean;
-}
 
 @Component({
   selector: 'app-root',
@@ -31,26 +23,32 @@ export class AppComponent {
     const dialogRef = this.dialog.open(NewStudentComponent, {data: {student: new Student()}});
 
     dialogRef.afterClosed().subscribe(result => {
-      result.id = STUDENTS[STUDENTS.length - 1].id + 1;
-      STUDENTS.push(result);
+      if (result) {
+        result.id = STUDENTS[STUDENTS.length - 1].id + 1;
+        STUDENTS.push(result);
+      }
       this.unFilter();
     });
   }
 
   openDeleteDialog(student: Student): void {
-    const dialogRef = this.dialog.open(DeletePopupComponent, {width: '300px', data: {student: student}});
+    if (student) {
+      const dialogRef = this.dialog.open(DeletePopupComponent, {width: '300px', data: {student: student}});
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.unFilter();
-    });
+      dialogRef.afterClosed().subscribe(() => {
+        this.unFilter();
+      });
+    }
   }
 
   openEditDialog(student: Student): void {
-    const dialogRef = this.dialog.open(EditStudentComponent, {data: {student: student}});
+    if (student) {
+      const dialogRef = this.dialog.open(EditStudentComponent, {data: {student: student}});
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.unFilter();
-    });
+      dialogRef.afterClosed().subscribe(() => {
+        this.unFilter();
+      });
+    }
   }
 
   filterStudentsDate(date: Date): void {
@@ -74,7 +72,7 @@ export class AppComponent {
   }
 
   sortData(column: string): void {
-    if(column === 'id') {
+    if (column === 'id') {
       if (this.sorted[0]) {
         this.Students = this.Students.sort((n1, n2) => n1.id - n2.id);
       } else {
@@ -82,7 +80,7 @@ export class AppComponent {
       }
       this.sorted[0] = !this.sorted[0];
     }
-    if(column === 'surname') {
+    if (column === 'surname') {
       if (this.sorted[1]) {
         this.Students = this.Students.sort((n1, n2) => n1.surname > n2.surname ? 1 : -1);
       } else {
@@ -90,7 +88,7 @@ export class AppComponent {
       }
       this.sorted[1] = !this.sorted[1];
     }
-    if(column === 'firstName') {
+    if (column === 'firstName') {
       if (this.sorted[2]) {
         this.Students = this.Students.sort((n1, n2) => n1.firstName > n2.firstName ? 1 : -1);
       } else {
@@ -98,7 +96,7 @@ export class AppComponent {
       }
       this.sorted[2] = !this.sorted[2];
     }
-    if(column === 'secondName') {
+    if (column === 'secondName') {
       if (this.sorted[3]) {
         this.Students = this.Students.sort((n1, n2) => n1.secondName > n2.secondName ? 1 : -1);
       } else {
@@ -106,7 +104,7 @@ export class AppComponent {
       }
       this.sorted[3] = !this.sorted[3];
     }
-    if(column === 'Date') {
+    if (column === 'Date') {
       if (this.sorted[4]) {
         this.Students = this.Students.sort((n1, n2) => n1.dateOfBirth > n2.dateOfBirth ? 1 : -1);
       } else {
@@ -114,7 +112,7 @@ export class AppComponent {
       }
       this.sorted[4] = !this.sorted[4];
     }
-    if(column === 'avgMark') {
+    if (column === 'avgMark') {
       if (this.sorted[5]) {
         this.Students = this.Students.sort((n1, n2) => n1.avgMark - n2.avgMark);
       } else {

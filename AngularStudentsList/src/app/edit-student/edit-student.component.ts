@@ -1,6 +1,7 @@
-import {Component, Inject,} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { StudentValidators } from '../student-validators/student.validators';
 
 @Component({
   selector: 'app-edit-student',
@@ -13,8 +14,9 @@ export class EditStudentComponent {
       firstName: [this.data.student.firstName, Validators.required],
       secondName: [this.data.student.secondName, Validators.required],
       surname: [this.data.student.surname, Validators.required]
-    }),
-    birthDate: [this.data.student.dateOfBirth, Validators.required],
+    }, {validators: StudentValidators.nameValidation}),
+    birthDate: [ this.data.student.dateOfBirth.toJSON().slice(0, 10),
+      [Validators.required, StudentValidators.dateValidation]],
     avgMark: [this.data.student.avgMark, Validators.required]
   });
 
