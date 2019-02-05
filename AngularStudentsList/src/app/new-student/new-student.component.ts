@@ -1,10 +1,11 @@
-import {Component, Inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { StudentValidators } from '../student-validators/student.validators';
 
 @Component({
   selector: 'app-new-student',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './new-student.component.html',
   styleUrls: ['./new-student.component.css']
 })

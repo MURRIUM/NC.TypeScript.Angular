@@ -7,6 +7,7 @@
       <th (click)="sortData('secondName')">Second Name</th>
       <th (click)="sortData('Date')">Birthday</th>
       <th (click)="sortData('avgMark')">Mark</th>
+      <th (click)="sortData('avgMark')">Mark in 50</th>
     </tr>
     <tr
       *ngFor="let student of Students"
@@ -22,7 +23,8 @@
         <td [class.found-student] = "student.firstName === studentFirstName.value">{{student.firstName}}</td>
         <td>{{student.secondName}}</td>
         <td>{{student.dateOfBirth.toDateString()}}</td>
-        <td>{{student.avgMark}}</td>
+        <td [appDesignateStudent]="student.avgMark">{{student.avgMark}}</td>
+        <td [appDesignateStudent]="student.avgMark"> {{student.avgMark | translationInFifty}}</td>
     </tr>
   </table>
   <div>
@@ -53,10 +55,10 @@
         <input #markFilter type="text">
       </label><br>
       <button
-        (click)="unFilter(); filterStudentsDate(dateFilter.valueAsDate);
+        (click)="refreshData(); filterStudentsDate(dateFilter.valueAsDate);
         filterStudentsMark(markFilter.value)"
       >Фильтровать</button>
-      <button  (click)="unFilter()">Убрать фильтры</button>
+      <button  (click)="refreshData()">Убрать фильтры</button>
     </div>
     <button mat-raised-button (click)="openNewStudentDialog()">Добавить студента</button>
     <button mat-raised-button (click)="openEditDialog(selectedStudent)">Изменить выбранного студента</button>

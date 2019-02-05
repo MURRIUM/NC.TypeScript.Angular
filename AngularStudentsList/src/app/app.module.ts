@@ -8,13 +8,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NewStudentComponent } from './new-student/new-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { DesignateStudentDirective } from './designate-student.directive';
+import { TranslationInFiftyPipe } from './translation-in-fifty.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeletePopupComponent,
     NewStudentComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    DesignateStudentDirective,
+    TranslationInFiftyPipe
   ],
   imports: [
     BrowserModule,

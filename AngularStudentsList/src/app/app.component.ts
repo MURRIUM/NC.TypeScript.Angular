@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ApplicationRef, ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import { STUDENTS} from './mock-students';
 import { Student} from './student';
@@ -8,6 +8,7 @@ import {EditStudentComponent} from './edit-student/edit-student.component';
 
 @Component({
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -17,7 +18,7 @@ export class AppComponent {
   sorted: boolean[] = [false, false, false, false, false, false];
   selectedStudent: Student;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private cdr: ChangeDetectorRef) {}
 
   openNewStudentDialog(): void {
     const dialogRef = this.dialog.open(NewStudentComponent, {data: {student: new Student()}});
@@ -27,7 +28,7 @@ export class AppComponent {
         result.id = STUDENTS[STUDENTS.length - 1].id + 1;
         STUDENTS.push(result);
       }
-      this.unFilter();
+      this.refreshData();
     });
   }
 
@@ -36,7 +37,7 @@ export class AppComponent {
       const dialogRef = this.dialog.open(DeletePopupComponent, {width: '300px', data: {student: student}});
 
       dialogRef.afterClosed().subscribe(() => {
-        this.unFilter();
+        this.refreshData();
       });
     }
   }
@@ -46,7 +47,7 @@ export class AppComponent {
       const dialogRef = this.dialog.open(EditStudentComponent, {data: {student: student}});
 
       dialogRef.afterClosed().subscribe(() => {
-        this.unFilter();
+        this.refreshData();
       });
     }
   }
@@ -67,8 +68,9 @@ export class AppComponent {
     }
   }
 
-  unFilter(): void {
+  refreshData(): void {
     this.Students = STUDENTS.slice();
+    this.cdr.detectChanges();
   }
 
   sortData(column: string): void {

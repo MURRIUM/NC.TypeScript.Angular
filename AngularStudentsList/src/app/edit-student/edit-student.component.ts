@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StudentValidators } from '../student-validators/student.validators';
 
 @Component({
   selector: 'app-edit-student',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './edit-student.component.html',
   styleUrls: ['./edit-student.component.css']
 })
