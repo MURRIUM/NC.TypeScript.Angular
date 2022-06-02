@@ -9,7 +9,7 @@
     "lint": "ng lint"
   },
   "dependencies": {
-    "@angular/core": "7.1.4",
+    "@angular/core": "11.0.5",
     "@angular/compiler": "7.1.4",
     "core-js": "2.4.1"
   },
